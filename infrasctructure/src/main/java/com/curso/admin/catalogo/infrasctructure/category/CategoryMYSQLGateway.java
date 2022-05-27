@@ -23,6 +23,8 @@ public class CategoryMYSQLGateway implements CategoryGateway {
     @Override
     public Category create(final Category aCategory) {
        return this.repository.save(CategoryJpaEntity.from(aCategory)).toAggregate();
+
+   
     }
 
     @Override
