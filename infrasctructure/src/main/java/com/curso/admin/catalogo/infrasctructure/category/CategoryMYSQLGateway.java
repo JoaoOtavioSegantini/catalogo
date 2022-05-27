@@ -5,6 +5,7 @@ import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.category.CategorySearchQuery;
 import com.curso.admin.catalogo.domain.pagination.Pagination;
+import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,10 @@ public class CategoryMYSQLGateway implements CategoryGateway {
     }
 
     @Override
-    public Category create(Category aCategory) {
-        return null;
+    public Category create(final Category aCategory) {
+       return this.repository.save(CategoryJpaEntity.from(aCategory)).toAggregate();
+
+   
     }
 
     @Override
