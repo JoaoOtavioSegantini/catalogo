@@ -1,17 +1,14 @@
 package com.curso.admin.catalogo.infrasctructure.category;
 
+import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.infrasctructure.MySQLGatewayTest;
+import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
-import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Collection;
 
 @MySQLGatewayTest
 public class CategoryMYSQLGatewayTest {
@@ -23,28 +20,75 @@ public class CategoryMYSQLGatewayTest {
     private CategoryRepository repository;
 
     @Test
-    public void testInjectedDependencies(){
-        Assertions.assertNotNull(categoryMYSQLGateway);
-        Assertions.assertNotNull(repository);
+    public void givenAValidCategory_whenCallsCreate_shouldReturnNewCategory(){
+        final var expectedName = "Filmes";
+        final var expectedDescription = "a categoria mais assistida";
+        final var expectedIsActive = true;
+
+        final var aCategory = Category.newCategory(expectedName, expectedDescription, expectedIsActive);
+
+        Assertions.assertEquals(0, repository.count());
+
+        final var actualCategory = categoryMYSQLGateway.create(aCategory);
+
+        Assertions.assertEquals(1, repository.count());
+        Assertions.assertEquals(expectedName, actualCategory.getName());
+        Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
+        Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
+        Assertions.assertEquals(aCategory.getId(), actualCategory.getId());
+        Assertions.assertNull(actualCategory.getDeletedAt());
+        Assertions.assertEquals(aCategory.getCreatedAt(), actualCategory.getCreatedAt());
+        Assertions.assertEquals(aCategory.getUpdatedAt(), actualCategory.getUpdatedAt());
+
+        final var aEntity = repository.findById(aCategory.getId().getValue()).get();
+
+        Assertions.assertEquals(expectedName, aEntity.getName());
+        Assertions.assertEquals(expectedDescription, aEntity.getDescription());
+        Assertions.assertEquals(expectedIsActive, aEntity.isActive());
+        Assertions.assertEquals(aCategory.getId().getValue(), aEntity.getId());
+        Assertions.assertNull(aEntity.getDeletedAt());
+        Assertions.assertEquals(aCategory.getCreatedAt(), aEntity.getCreatedAt());
+        Assertions.assertEquals(aCategory.getUpdatedAt(), aEntity.getUpdatedAt());
+
     }
 
+    @Test
+    public void givenAValidCategory_whenCallsUpdated_shouldReturnCategoryUpdated(){
+        final var expectedName = "Filmes";
+        final var expectedDescription = "a categoria mais assistida";
+        final var expectedIsActive = true;
 
-   static class cleanUpExtension implements BeforeEachCallback {
+        final var aCategory = Category.newCategory("film", null, expectedIsActive);
 
-        @Override
-        public void beforeEach(ExtensionContext context) throws Exception {
-            final var repositories = SpringExtension
-                    .getApplicationContext(context)
-                    .getBeansOfType(CrudRepository.class)
-                    .values();
+        Assertions.assertEquals(0, repository.count());
+        repository.saveAndFlush(CategoryJpaEntity.from(aCategory));
+        Assertions.assertEquals(1, repository.count());
 
-            cleanUp(repositories);
-        }
+        final var aUpdatedCattegory = aCategory
+                .clone()
+                .update(expectedName, expectedDescription, expectedIsActive);
 
-        private void cleanUp (final Collection<CrudRepository> repositories) {
-            repositories.forEach(CrudRepository::deleteAll);
-        }
+        final var actualCategory = categoryMYSQLGateway.update(aUpdatedCattegory);
+
+        Assertions.assertEquals(1, repository.count());
+        Assertions.assertEquals(expectedName, actualCategory.getName());
+        Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
+        Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
+        Assertions.assertEquals(aCategory.getId(), actualCategory.getId());
+        Assertions.assertNull(actualCategory.getDeletedAt());
+        Assertions.assertEquals(aCategory.getCreatedAt(), actualCategory.getCreatedAt());
+        Assertions.assertTrue(aCategory.getUpdatedAt().isBefore(actualCategory.getUpdatedAt()));
+
+        final var aEntity = repository.findById(aCategory.getId().getValue()).get();
+
+        Assertions.assertEquals(expectedName, aEntity.getName());
+        Assertions.assertEquals(expectedDescription, aEntity.getDescription());
+        Assertions.assertEquals(expectedIsActive, aEntity.isActive());
+        Assertions.assertEquals(aCategory.getId().getValue(), aEntity.getId());
+        Assertions.assertNull(aEntity.getDeletedAt());
+        Assertions.assertEquals(aCategory.getCreatedAt(), aEntity.getCreatedAt());
+        Assertions.assertTrue(aCategory.getUpdatedAt().isBefore(actualCategory.getUpdatedAt()));
+
     }
-
 
 }
