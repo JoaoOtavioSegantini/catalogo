@@ -3,7 +3,7 @@ package com.curso.admin.catalogo.infrasctructure.category;
 import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.category.CategorySearchQuery;
-import com.curso.admin.catalogo.infrasctructure.MySQLGatewayTest;
+import com.curso.admin.catalogo.MySQLGatewayTest;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
