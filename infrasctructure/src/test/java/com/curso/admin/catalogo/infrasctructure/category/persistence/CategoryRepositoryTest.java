@@ -1,7 +1,7 @@
 package com.curso.admin.catalogo.infrasctructure.category.persistence;
 
 import com.curso.admin.catalogo.domain.category.Category;
-import com.curso.admin.catalogo.infrasctructure.MySQLGatewayTest;
+import com.curso.admin.catalogo.MySQLGatewayTest;
 import org.hibernate.PropertyValueException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
