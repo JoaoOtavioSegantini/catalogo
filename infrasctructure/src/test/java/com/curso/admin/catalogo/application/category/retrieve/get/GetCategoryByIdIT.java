@@ -4,7 +4,7 @@ import com.curso.admin.catalogo.IntegrationTest;
 import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.category.CategoryID;
-import com.curso.admin.catalogo.domain.exceptions.DomainException;
+import com.curso.admin.catalogo.domain.exceptions.NotFoundException;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
@@ -66,7 +66,7 @@ public class GetCategoryByIdIT {
         final var expectedErrorMessage = "Category with ID 123 was not found";
 
         final var actualException = Assertions.assertThrows(
-                DomainException.class, () -> useCase.execute(expectedId.getValue())
+                NotFoundException.class, () -> useCase.execute(expectedId.getValue())
         );
 
         Assertions.assertEquals(expectedErrorMessage, actualException.getMessage());
