@@ -1,5 +1,6 @@
 package com.curso.admin.catalogo.application.category.update;
 
+import com.curso.admin.catalogo.application.UseCaseTest;
 import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.category.CategoryID;
@@ -14,13 +15,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 
 @ExtendWith(MockitoExtension.class)
-public class UpdateCategoryUseCaseTest {
+public class UpdateCategoryUseCaseTest extends UseCaseTest {
 
     @InjectMocks
     private DefaultUpdateCategoryUseCase useCase;
@@ -28,9 +30,9 @@ public class UpdateCategoryUseCaseTest {
     @Mock
     private CategoryGateway categoryGateway;
 
-    @BeforeEach
-    void cleanUp() {
-        Mockito.reset(categoryGateway);
+    @Override
+    protected List<Object> getMocks() {
+        return List.of(categoryGateway);
     }
 
     @Test

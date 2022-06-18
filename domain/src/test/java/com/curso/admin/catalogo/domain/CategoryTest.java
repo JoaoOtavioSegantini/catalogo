@@ -197,7 +197,7 @@ public class CategoryTest {
     }
 
     @Test
-    public void givenAVValidCategory_whenCallUpdate_thenReturnCategoryUpdated() {
+    public void givenAVValidCategory_whenCallUpdate_thenReturnCategoryUpdated() throws InterruptedException {
         final String expectedName = "Filmes";
         final var exceptionErrorCount = 1;
 
@@ -213,6 +213,8 @@ public class CategoryTest {
 
         Assertions.assertFalse(aCategory.isActive());
         Assertions.assertNotNull(aCategory.getDeletedAt());
+
+        Thread.sleep(200);
 
         final var actualCategory = aCategory.update(expectedName, expectedDescription, expectedIsActive);
         Assertions.assertDoesNotThrow(() -> actualCategory.validate(new ThrowsValidationHandler()));
