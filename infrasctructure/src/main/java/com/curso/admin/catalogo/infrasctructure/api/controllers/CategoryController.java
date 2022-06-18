@@ -9,7 +9,7 @@ import com.curso.admin.catalogo.application.category.retrieve.list.ListCategorie
 import com.curso.admin.catalogo.application.category.update.UpdateCategoryCommand;
 import com.curso.admin.catalogo.application.category.update.UpdateCategoryOutput;
 import com.curso.admin.catalogo.application.category.update.UpdateCategoryUseCase;
-import com.curso.admin.catalogo.domain.category.CategorySearchQuery;
+import com.curso.admin.catalogo.domain.pagination.SearchQuery;
 import com.curso.admin.catalogo.domain.pagination.Pagination;
 import com.curso.admin.catalogo.domain.validation.handler.Notification;
 import com.curso.admin.catalogo.infrasctructure.api.CategoryApi;
@@ -66,7 +66,7 @@ public class CategoryController implements CategoryApi {
 
     @Override
     public Pagination<CategoryListResponse> listCategories(String search, int page, int perPage, String sort, String direction) {
-        return listCategoriesUseCase.execute(new CategorySearchQuery(page,perPage, search, sort, direction))
+        return listCategoriesUseCase.execute(new SearchQuery(page,perPage, search, sort, direction))
                 .map(CategoryApiPresenter::present);
     }
 

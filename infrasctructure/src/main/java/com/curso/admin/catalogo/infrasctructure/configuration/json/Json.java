@@ -1,7 +1,6 @@
 package com.curso.admin.catalogo.infrasctructure.configuration.json;
 
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -33,7 +32,7 @@ public enum Json {
         }
     }
 
-    private final ObjectMapper mapper = new Jackson2ObjectMapperBuilder()
+    public final ObjectMapper mapper = new Jackson2ObjectMapperBuilder()
             .dateFormat(new StdDateFormat())
             .featuresToDisable(
                     DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,

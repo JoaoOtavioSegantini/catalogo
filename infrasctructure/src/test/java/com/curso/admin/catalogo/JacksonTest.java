@@ -1,10 +1,7 @@
 package com.curso.admin.catalogo;
 
 import com.curso.admin.catalogo.infrasctructure.configuration.ObjectMapperConfig;
-import com.curso.admin.catalogo.infrasctructure.configuration.WebServerConfig;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.test.context.ActiveProfiles;

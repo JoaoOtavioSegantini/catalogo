@@ -1,5 +1,6 @@
 package com.curso.admin.catalogo.application.category.delete;
 
+import com.curso.admin.catalogo.application.UseCaseTest;
 import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.category.CategoryID;
@@ -12,8 +13,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
-public class DeleteCategoryUseCaseTest {
+import java.util.List;
+
+public class DeleteCategoryUseCaseTest extends UseCaseTest {
 
     @InjectMocks
     private DefaultDeleteCategoryUseCase useCase;
@@ -21,9 +23,9 @@ public class DeleteCategoryUseCaseTest {
     @Mock
     private CategoryGateway categoryGateway;
 
-    @BeforeEach
-    void cleanUp() {
-        Mockito.reset(categoryGateway);
+    @Override
+    protected List<Object> getMocks() {
+        return List.of(categoryGateway);
     }
 
     @Test

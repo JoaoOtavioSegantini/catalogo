@@ -3,7 +3,7 @@ package com.curso.admin.catalogo.infrasctructure.category;
 import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.category.CategoryID;
-import com.curso.admin.catalogo.domain.category.CategorySearchQuery;
+import com.curso.admin.catalogo.domain.pagination.SearchQuery;
 import com.curso.admin.catalogo.domain.pagination.Pagination;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity;
 import com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryRepository;
@@ -14,6 +14,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static com.curso.admin.catalogo.infrasctructure.utils.SpecificationUtils.like;
@@ -53,7 +55,7 @@ public class CategoryMYSQLGateway implements CategoryGateway {
     }
 
     @Override
-    public Pagination<Category> findAll(CategorySearchQuery aQuery) {
+    public Pagination<Category> findAll(SearchQuery aQuery) {
       final var page =  PageRequest.of(
                 aQuery.page(),
                 aQuery.perPage(),
@@ -74,6 +76,13 @@ public class CategoryMYSQLGateway implements CategoryGateway {
                  pageResult.map(CategoryJpaEntity::toAggregate).toList()
          );
     }
+
+    @Override
+    public List<CategoryID> existsByID(Iterable<CategoryID> ids) {
+        // TODO: implementar quando estiver na camadade infraestrutura do Genre
+        return Collections.emptyList();
+    }
+
     private Category save(final Category aCategory) {
         return this.repository.save(CategoryJpaEntity.from(aCategory)).toAggregate();
     }

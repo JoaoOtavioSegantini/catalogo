@@ -3,7 +3,6 @@ package com.curso.admin.catalogo.application.category.create;
 import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.validation.handler.Notification;
-import com.curso.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
 import io.vavr.API;
 import io.vavr.control.Either;
 
