@@ -29,21 +29,36 @@ public class ListCategoriesUseCaseIT {
     private CategoryGateway categoryGateway;
 
     @BeforeEach
-    void mockUp() {
-     final var categories = List.of(
-             Category.newCategory("Netflix Originals", "De autoria da Netflix", true),
-                     Category.newCategory("Filmes", null, true),
-                     Category.newCategory("Documentarios", null, true),
-                     Category.newCategory("Amazon Originals", "Títulos de autoria da Amazon Prime", true),
-                     Category.newCategory("Sports", null, true),
-                     Category.newCategory("Series", null, true),
-                     Category.newCategory("Kids", "categoria para crianças", true))
-             .stream()
-             .map(CategoryJpaEntity::from)
-             .toList();
+    void mockUp() throws InterruptedException {
+        final var netflix = Category.newCategory("Netflix Originals", "De autoria da Netflix", true);
+        Thread.sleep(20);
+        final var filmes = Category.newCategory("Filmes", null, true);
+        Thread.sleep(20);
+        final var documentarios = Category.newCategory("Documentarios", null, true);
+        Thread.sleep(20);
+        final var amazon =  Category.newCategory("Amazon Originals", "Títulos de autoria da Amazon Prime", true);
+        Thread.sleep(20);
+        final var sports =  Category.newCategory("Sports", null, true);
+        Thread.sleep(20);
+        final var series =  Category.newCategory("Series", null, true);
+        Thread.sleep(20);
+        final var kids = Category.newCategory("Kids", "categoria para crianças", true);
+
+        final var categories = List.of(
+                        netflix,
+                        filmes,
+                        documentarios,
+                        amazon,
+                        sports,
+                        series,
+                        kids
+                )
+                .stream()
+                .map(CategoryJpaEntity::from)
+                .toList();
 
 
-     repository.saveAllAndFlush(categories);
+        repository.saveAllAndFlush(categories);
 
     }
 
