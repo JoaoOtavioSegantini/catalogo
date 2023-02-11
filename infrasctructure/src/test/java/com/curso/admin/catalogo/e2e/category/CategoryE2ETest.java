@@ -2,7 +2,7 @@ package com.curso.admin.catalogo.e2e.category;
 
 
 import com.curso.admin.catalogo.E2ETest;
-import com.curso.admin.catalogo.application.category.retrieve.get.CategoryOutput;
+import com.curso.admin.catalogo.infrasctructure.category.models.CategoryResponse;
 import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.infrasctructure.category.models.CreateCategoryInput;
 import com.curso.admin.catalogo.infrasctructure.category.models.UpdateCategoryInput;
@@ -56,11 +56,11 @@ public class CategoryE2ETest {
 
         final var actualID = givenACategory(expectedName, expectedDescription, expectedIsActive);
 
-        final var actualCategory = retrieveCategory(actualID.getValue());
+        final var actualCategory = retrieveACategory(actualID.getValue());
 
         Assertions.assertEquals(expectedName, actualCategory.name());
         Assertions.assertEquals(expectedDescription, actualCategory.description());
-        Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
+        Assertions.assertEquals(expectedIsActive, actualCategory.active());
         Assertions.assertNotNull(actualCategory.createdAt());
         Assertions.assertNotNull(actualCategory.updatedAt());
         Assertions.assertNull(actualCategory.deletedAt());
@@ -146,16 +146,16 @@ public class CategoryE2ETest {
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
 
-        final var actualID = givenACategory(expectedName, expectedDescription, expectedIsActive);
+        final var actualId = givenACategory(expectedName, expectedDescription, expectedIsActive);
 
-        final var actualCategory = categoryRepository.findById(actualID.getValue()).get();
+        final var actualCategory = retrieveACategory(actualId.getValue());
 
-        Assertions.assertEquals(expectedName, actualCategory.getName());
-        Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
-        Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
-        Assertions.assertNotNull(actualCategory.getCreatedAt());
-        Assertions.assertNotNull(actualCategory.getUpdatedAt());
-        Assertions.assertNull(actualCategory.getDeletedAt());
+        Assertions.assertEquals(expectedName, actualCategory.name());
+        Assertions.assertEquals(expectedDescription, actualCategory.description());
+        Assertions.assertEquals(expectedIsActive, actualCategory.active());
+        Assertions.assertNotNull(actualCategory.createdAt());
+        Assertions.assertNotNull(actualCategory.updatedAt());
+        Assertions.assertNull(actualCategory.deletedAt());
 
     }
 
@@ -323,17 +323,16 @@ public class CategoryE2ETest {
       return CategoryID.from(actualCategoryID);
     }
 
-    private CategoryOutput retrieveCategory(final String anId) throws Exception {
-        final var request = MockMvcRequestBuilders.get("/categories/" + anId)
+    private CategoryResponse retrieveACategory(final String anId) throws Exception {
+        final var aRequest = MockMvcRequestBuilders.get("/categories/" + anId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON);
 
-       final var response = this.mvc.perform(request)
+        final var json = this.mvc.perform(aRequest)
                 .andExpect(status().isOk())
                 .andReturn()
-                .getResponse()
-                .getContentAsString();
+                .getResponse().getContentAsString();
 
-       return Json.readValue(response, CategoryOutput.class);
+        return Json.readValue(json, CategoryResponse.class);
     }
 }
