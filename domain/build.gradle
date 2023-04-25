@@ -11,9 +11,27 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    testImplementation 'org.awaitility:awaitility:3.0.0'
+   // testImplementation 'org.awaitility:awaitility:3.0.0'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+
 }
+
+configurations {
+    testClasses {
+        extendsFrom(testImplementation)
+    }
+}
+
+task testJar(type: Jar) {
+    archiveClassifier.set('test')
+    from sourceSets.test.output
+}
+
 
 test {
     useJUnitPlatform()
+}
+
+artifacts {
+    testClasses testJar
 }

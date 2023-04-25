@@ -2,4 +2,5 @@ rootProject.name = 'admin-do-catalogo'
 include 'domain'
 include 'application'
 include 'infrasctructure'
+include 'infrastructure'
 

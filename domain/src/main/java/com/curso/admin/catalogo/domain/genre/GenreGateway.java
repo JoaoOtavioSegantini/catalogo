@@ -18,4 +18,7 @@ public interface GenreGateway {
 
     Pagination<Genre> findAll(SearchQuery searchQuery);
 
+    List<GenreID> existsByIds(Iterable<GenreID> ids);
+
+
 }

@@ -32,29 +32,19 @@ public class Genre extends AggregateRoot<GenreID> {
     ) {
         super(anId);
         this.name = aName;
-        this.active = isActive;
         this.categories = categories;
+        this.active = isActive;
         this.createdAt = aCreatedAt;
         this.updatedAt = aUpdatedAt;
         this.deletedAt = aDeletedAt;
-
         selfValidate();
     }
 
-    private void selfValidate() {
-        final var notification = Notification.create();
-        validate(notification);
-
-        if(notification.hasError()) {
-            throw new NotificationException("",notification);
-        }
-    }
-
-    public static Genre newGenre(final String aName, final boolean isActive){
+    public static Genre newGenre(final String aName, final boolean isActive) {
         final var anId = GenreID.unique();
         final var now = InstantUtils.now();
         final var deletedAt = isActive ? null : now;
-        return new Genre(anId, aName, isActive,new ArrayList<>(), now, now, deletedAt);
+        return new Genre(anId, aName, isActive, new ArrayList<>(), now, now, deletedAt);
     }
 
     public static Genre with(
@@ -66,12 +56,10 @@ public class Genre extends AggregateRoot<GenreID> {
             final Instant aUpdatedAt,
             final Instant aDeletedAt
     ) {
-        return new Genre(anId, aName, isActive,categories, aCreatedAt, aUpdatedAt, aDeletedAt);
+        return new Genre(anId, aName, isActive, categories, aCreatedAt, aUpdatedAt, aDeletedAt);
     }
 
-    public static Genre with(
-           final Genre aGenre
-    ) {
+    public static Genre with(final Genre aGenre) {
         return new Genre(
                 aGenre.id,
                 aGenre.name,
@@ -88,36 +76,16 @@ public class Genre extends AggregateRoot<GenreID> {
         new GenreValidator(this, handler).validate();
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public List<CategoryID> getCategories() {
-        return Collections.unmodifiableList(categories);
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public Genre update(final String aName, final boolean isActive,final List<CategoryID> categories) {
-        this.name = aName;
-        this.categories = new ArrayList<>(categories != null ? categories : Collections.emptyList());
-        if(isActive) {
+    public Genre update(final String aName, final boolean isActive, final List<CategoryID> categories) {
+        if (isActive) {
             activate();
         } else {
             deactivate();
         }
+        this.name = aName;
+        this.categories = new ArrayList<>(categories != null ? categories : Collections.emptyList());
         this.updatedAt = InstantUtils.now();
         selfValidate();
-        return this;
-    }
-
-    public Genre activate() {
-        this.deletedAt = null;
-        this.active = true;
-        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -128,6 +96,25 @@ public class Genre extends AggregateRoot<GenreID> {
         this.active = false;
         this.updatedAt = InstantUtils.now();
         return this;
+    }
+
+    public Genre activate() {
+        this.deletedAt = null;
+        this.active = true;
+        this.updatedAt = InstantUtils.now();
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public List<CategoryID> getCategories() {
+        return Collections.unmodifiableList(categories);
     }
 
     public Instant getCreatedAt() {
@@ -142,14 +129,24 @@ public class Genre extends AggregateRoot<GenreID> {
         return deletedAt;
     }
 
-    public Genre addCategory(final CategoryID anId) {
-        if (anId == null) {
+    private void selfValidate() {
+        final var notification = Notification.create();
+        validate(notification);
+
+        if (notification.hasError()) {
+            throw new NotificationException("Failed to create a Aggregate Genre", notification);
+        }
+    }
+
+    public Genre addCategory(final CategoryID aCategoryID) {
+        if (aCategoryID == null) {
             return this;
         }
-        this.categories.add(anId);
+        this.categories.add(aCategoryID);
         this.updatedAt = InstantUtils.now();
         return this;
     }
+
     public Genre addCategories(final List<CategoryID> categories) {
         if (categories == null || categories.isEmpty()) {
             return this;
@@ -158,11 +155,12 @@ public class Genre extends AggregateRoot<GenreID> {
         this.updatedAt = InstantUtils.now();
         return this;
     }
-    public Genre removeCategory(CategoryID aCategoryId) {
-        if (aCategoryId == null) {
+
+    public Genre removeCategory(final CategoryID aCategoryID) {
+        if (aCategoryID == null) {
             return this;
         }
-        this.categories.remove(aCategoryId);
+        this.categories.remove(aCategoryID);
         this.updatedAt = InstantUtils.now();
         return this;
     }
