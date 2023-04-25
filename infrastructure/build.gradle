@@ -43,6 +43,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-undertow')
 
     implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
+    testImplementation(project(path: ':domain', configuration: 'testClasses'))
 
     testRuntimeOnly('com.h2database:h2')
 
