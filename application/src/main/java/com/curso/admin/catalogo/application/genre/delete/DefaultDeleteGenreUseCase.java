@@ -1,15 +1,11 @@
 package com.curso.admin.catalogo.application.genre.delete;
 
-import com.curso.admin.catalogo.application.category.delete.DeleteCategoryUseCase;
-import com.curso.admin.catalogo.domain.category.CategoryGateway;
-import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.genre.GenreGateway;
 import com.curso.admin.catalogo.domain.genre.GenreID;
 
 import java.util.Objects;
 
-public class DefaultDeleteGenreUseCase extends DeleteCategoryUseCase {
-
+public class DefaultDeleteGenreUseCase extends DeleteGenreUseCase {
     private final GenreGateway genreGateway;
 
     public DefaultDeleteGenreUseCase(final GenreGateway genreGateway) {
@@ -17,7 +13,8 @@ public class DefaultDeleteGenreUseCase extends DeleteCategoryUseCase {
     }
 
     @Override
-    public void execute(final String aIn) {
-        this.genreGateway.deleteById(GenreID.from(aIn));
+    public void execute(String anIn) {
+        this.genreGateway.deleteById(GenreID.from(anIn));
+
     }
 }
