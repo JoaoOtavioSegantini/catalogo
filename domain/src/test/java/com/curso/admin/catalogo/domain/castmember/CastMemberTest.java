@@ -1,5 +1,6 @@
 package com.curso.admin.catalogo.domain.castmember;
 
+import com.curso.admin.catalogo.domain.Fixture;
 import com.curso.admin.catalogo.domain.exceptions.NotificationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ public class CastMemberTest {
 
     @Test
     public void givenAValidParams_whenCallsNewMember_thenInstantiateACastMember() {
-        final var expectedName = "Vin Diesel";
+        final var expectedName = Fixture.name();
         final var expectedType = CastMemberType.ACTOR;
 
         final var actualMember = CastMember.newMember(expectedName, expectedType);
@@ -80,7 +81,7 @@ public class CastMemberTest {
 
     @Test
     public void givenAInvalidNullType_whenCallsNewMember_shouldReceiveANotification() {
-        final var expectedName = "Vin Diesel";
+        final var expectedName = Fixture.name();
         final CastMemberType expectedType = null;
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'type' should not be null";
@@ -97,7 +98,7 @@ public class CastMemberTest {
 
     @Test
     public void givenAValidCastMember_whenCallUpdate_shouldReceiveUpdated() throws InterruptedException {
-        final var expectedName = "Vin Diesel";
+        final var expectedName = Fixture.name();
         final var expectedType = CastMemberType.ACTOR;
 
         final var actualMember =
@@ -197,7 +198,7 @@ public class CastMemberTest {
 
     @Test
     public void givenAValidCastMember_whenCallUpdateWithInvalidNullType_shouldReceiveNotification() {
-        final var expectedName = "Vin Diesel";
+        final var expectedName = Fixture.name();
         final CastMemberType expectedType = null;
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'type' should not be null";

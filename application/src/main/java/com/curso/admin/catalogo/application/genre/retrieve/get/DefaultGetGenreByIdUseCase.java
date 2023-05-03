@@ -1,12 +1,10 @@
 package com.curso.admin.catalogo.application.genre.retrieve.get;
 
-import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.exceptions.NotFoundException;
 import com.curso.admin.catalogo.domain.genre.Genre;
 import com.curso.admin.catalogo.domain.genre.GenreGateway;
 import com.curso.admin.catalogo.domain.genre.GenreID;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 

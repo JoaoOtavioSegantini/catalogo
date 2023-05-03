@@ -1,6 +1,5 @@
 package com.curso.admin.catalogo.application.genre.retrieve.get;
 
-import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.genre.Genre;
 import com.curso.admin.catalogo.domain.genre.GenreID;

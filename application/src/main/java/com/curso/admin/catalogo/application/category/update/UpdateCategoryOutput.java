@@ -1,7 +1,6 @@
 package com.curso.admin.catalogo.application.category.update;
 
 import com.curso.admin.catalogo.domain.category.Category;
-import com.curso.admin.catalogo.domain.category.CategoryID;
 
 public record UpdateCategoryOutput(
         String id

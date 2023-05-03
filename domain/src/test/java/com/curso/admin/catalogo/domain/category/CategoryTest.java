@@ -1,6 +1,5 @@
 package com.curso.admin.catalogo.domain.category;
 
-import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.exceptions.DomainException;
 import com.curso.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Assertions;

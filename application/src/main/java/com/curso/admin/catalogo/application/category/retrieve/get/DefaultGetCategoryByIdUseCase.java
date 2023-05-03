@@ -1,13 +1,9 @@
 package com.curso.admin.catalogo.application.category.retrieve.get;
 
-import com.curso.admin.catalogo.domain.AggregateRoot;
 import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.category.CategoryID;
-import com.curso.admin.catalogo.domain.exceptions.DomainException;
 import com.curso.admin.catalogo.domain.exceptions.NotFoundException;
-import com.curso.admin.catalogo.domain.validation.Error;
-
 import java.util.Objects;
 import java.util.function.Supplier;
 

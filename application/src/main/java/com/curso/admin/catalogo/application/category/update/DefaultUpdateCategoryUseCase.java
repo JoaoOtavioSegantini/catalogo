@@ -5,7 +5,6 @@ import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.exceptions.DomainException;
 import com.curso.admin.catalogo.domain.exceptions.NotFoundException;
-import com.curso.admin.catalogo.domain.validation.Error;
 import com.curso.admin.catalogo.domain.validation.handler.Notification;
 import io.vavr.API;
 import io.vavr.control.Either;

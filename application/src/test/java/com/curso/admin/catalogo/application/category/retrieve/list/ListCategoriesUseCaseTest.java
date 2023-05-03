@@ -6,14 +6,10 @@ import com.curso.admin.catalogo.domain.category.CategoryGateway;
 import com.curso.admin.catalogo.domain.pagination.SearchQuery;
 import com.curso.admin.catalogo.domain.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.List;
 
 public class ListCategoriesUseCaseTest extends UseCaseTest {
@@ -111,7 +107,6 @@ public class ListCategoriesUseCaseTest extends UseCaseTest {
         final var expectedTerms = "";
         final var expectedSort = "createdAt";
         final var expectedDirection = "asc";
-        final var expectedItemsCount = 2;
         final var expectedErrorMessage = "Gateway error";
 
         final var query = new SearchQuery(

@@ -1,7 +1,6 @@
 package com.curso.admin.catalogo.application.genre.retrieve.get;
 
 import com.curso.admin.catalogo.application.UseCaseTest;
-import com.curso.admin.catalogo.domain.category.Category;
 import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.exceptions.DomainException;
 import com.curso.admin.catalogo.domain.genre.Genre;
@@ -15,8 +14,6 @@ import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GetGenreByIdUseCaseTest extends UseCaseTest {
 
