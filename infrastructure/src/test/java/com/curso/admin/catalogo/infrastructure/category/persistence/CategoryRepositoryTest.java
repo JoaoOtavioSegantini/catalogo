@@ -16,7 +16,7 @@ public class CategoryRepositoryTest {
 
     @Test
     public void givenANullName_whenCallsSave_shouldReturnAnError(){
-        final var expectedMessageError = "not-null property references a null or transient value : com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity.name";
+        final var expectedMessageError = "not-null property references a null or transient value : com.curso.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity.name";
         final var expectedProperty = "name";
         final var aCategory = Category.newCategory("Filmes", "a categoria mais assistida", true);
 
@@ -35,7 +35,7 @@ public class CategoryRepositoryTest {
     }
     @Test
     public void givenANullCreatedAt_whenCallsSave_shouldReturnAnError(){
-        final var expectedMessageError = "not-null property references a null or transient value : com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity.createdAt";
+        final var expectedMessageError = "not-null property references a null or transient value : com.curso.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity.createdAt";
         final var expectedProperty = "createdAt";
         final var aCategory = Category.newCategory("Filmes", "a categoria mais assistida", true);
 
@@ -54,7 +54,7 @@ public class CategoryRepositoryTest {
     }
     @Test
     public void givenANullUpdatedAt_whenCallsSave_shouldReturnAnError(){
-        final var expectedMessageError = "not-null property references a null or transient value : com.curso.admin.catalogo.infrasctructure.category.persistence.CategoryJpaEntity.updatedAt";
+        final var expectedMessageError = "not-null property references a null or transient value : com.curso.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity.updatedAt";
         final var expectedProperty = "updatedAt";
         final var aCategory = Category.newCategory("Filmes", "a categoria mais assistida", true);
 
