@@ -45,7 +45,7 @@ public class Notification implements ValidationHandler {
            return aValidation.validate();
         } catch (DomainException ex){
             this.errors.addAll(ex.getErrors());
-        } catch (Throwable t){
+        } catch (final Throwable t){
             this.errors.add(new Error(t.getMessage()));
         }
         return null;
