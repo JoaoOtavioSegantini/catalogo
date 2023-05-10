@@ -1,11 +1,12 @@
 package com.curso.admin.catalogo.domain.category;
 
+import com.curso.admin.catalogo.domain.UnitTest;
 import com.curso.admin.catalogo.domain.exceptions.DomainException;
 import com.curso.admin.catalogo.domain.validation.handler.ThrowsValidationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CategoryTest {
+public class CategoryTest extends UnitTest {
 
     @Test
     public void  givenAInvalidParams_whenCallNewCategory_thenInstantiateACategory() {

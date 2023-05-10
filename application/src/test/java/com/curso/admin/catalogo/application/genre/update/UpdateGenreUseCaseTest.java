@@ -50,7 +50,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 expectedID.getValue(),
                 expectedName,
                 expectedIsActive,
-               asString(expectedCategories)
+               asStrings(expectedCategories)
         );
 
         when(genreGateway.findById(any())).thenReturn(Optional.of(Genre.with(aGenre)));
@@ -90,7 +90,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 expectedID.getValue(),
                 expectedName,
                 expectedIsActive,
-                asString(expectedCategories)
+                asStrings(expectedCategories)
         );
 
         when(genreGateway.findById(any())).thenReturn(Optional.of(Genre.with(aGenre)));
@@ -132,7 +132,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 expectedID.getValue(),
                 expectedName,
                 expectedIsActive,
-                asString(expectedCategories)
+                asStrings(expectedCategories)
         );
 
         when(genreGateway.findById(any())).thenReturn(Optional.of(Genre.with(aGenre)));
@@ -163,7 +163,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 expectedID.getValue(),
                 expectedName,
                 expectedIsActive,
-                asString(expectedCategories)
+                asStrings(expectedCategories)
         );
 
         when(genreGateway.findById(any())).thenReturn(Optional.of(Genre.with(aGenre)));
@@ -199,7 +199,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
                 expectedID.getValue(),
                 expectedName,
                 expectedIsActive,
-                asString(expectedCategories)
+                asStrings(expectedCategories)
         );
 
         when(genreGateway.findById(any())).thenReturn(Optional.of(Genre.with(aGenre)));
@@ -219,7 +219,7 @@ public class UpdateGenreUseCaseTest extends UseCaseTest {
 
 
     }
-    private List<String> asString(List<CategoryID> ids) {
+    private List<String> asStrings(List<CategoryID> ids) {
         return ids.stream().map(CategoryID::getValue).toList();
     }
 

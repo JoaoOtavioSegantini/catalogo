@@ -44,7 +44,7 @@ class GetGenreByIdUseCaseTest extends UseCaseTest {
         final var actualGenre = useCase.execute(expectedId.getValue());
 
         Assertions.assertEquals(expectedName, actualGenre.name());
-        Assertions.assertEquals(asString(expectedCategories), actualGenre.categories());
+        Assertions.assertEquals(asStrings(expectedCategories), actualGenre.categories());
         Assertions.assertEquals(expectedIsActive, actualGenre.isActive());
         Assertions.assertEquals(aGenre.getCreatedAt(), actualGenre.createdAt());
         Assertions.assertEquals(aGenre.getUpdatedAt(), actualGenre.updatedAt());
@@ -52,7 +52,7 @@ class GetGenreByIdUseCaseTest extends UseCaseTest {
         Assertions.assertEquals(expectedId, actualGenre.id());
     }
 
-    private List<String> asString(List<CategoryID> categories) {
+    private List<String> asStrings(List<CategoryID> categories) {
         return categories.stream().map(CategoryID::getValue).toList();
     }
 

@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Tag;
 
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.lang.annotation.*;

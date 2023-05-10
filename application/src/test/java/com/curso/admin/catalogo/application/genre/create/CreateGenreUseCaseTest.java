@@ -41,7 +41,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         final var expectedCategories = List.<CategoryID>of();
 
 
-        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asString(expectedCategories));
+        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asStrings(expectedCategories));
 
         when(genreGateway.create(any())).thenAnswer(returnsFirstArg());
 
@@ -67,7 +67,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         final var expectedCategories = List.<CategoryID>of();
 
 
-        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asString(expectedCategories));
+        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asStrings(expectedCategories));
 
         when(genreGateway.create(any())).thenAnswer(returnsFirstArg());
 
@@ -96,7 +96,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         );
 
 
-        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asString(expectedCategories));
+        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asStrings(expectedCategories));
 
         when(categoryGateway.existsByID(any())).thenReturn(expectedCategories);
         when(genreGateway.create(any())).thenAnswer(returnsFirstArg());
@@ -128,7 +128,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         final var expectedCategories = List.<CategoryID>of();
 
 
-        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asString(expectedCategories));
+        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asStrings(expectedCategories));
 
         final var actualEx = Assertions.assertThrows(NotificationException.class, () -> useCase.execute(aCommand));
 
@@ -148,7 +148,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         final var expectedCategories = List.<CategoryID>of();
 
 
-        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asString(expectedCategories));
+        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asStrings(expectedCategories));
 
         final var actualEx = Assertions.assertThrows(NotificationException.class, () -> useCase.execute(aCommand));
 
@@ -175,7 +175,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         );
         when(categoryGateway.existsByID(any())).thenReturn(List.of(series));
 
-        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asString(expectedCategories));
+        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asStrings(expectedCategories));
 
         final var actualEx = Assertions.assertThrows(NotificationException.class, () -> useCase.execute(aCommand));
 
@@ -205,7 +205,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         );
         when(categoryGateway.existsByID(any())).thenReturn(List.of(series));
 
-        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asString(expectedCategories));
+        final var aCommand = CreateGenreCommand.with(expectedName, expectedIsActive, asStrings(expectedCategories));
 
         final var actualEx = Assertions.assertThrows(NotificationException.class, () -> useCase.execute(aCommand));
 
@@ -217,7 +217,7 @@ class CreateGenreUseCaseTest extends UseCaseTest {
         Mockito.verify(genreGateway, times(0)).create(any());
 
     }
-    private List<String> asString(final List<CategoryID> categories){
+    private List<String> asStrings(final List<CategoryID> categories){
         return categories.stream()
                 .map(CategoryID::getValue)
                 .toList();

@@ -1,11 +1,12 @@
 package com.curso.admin.catalogo.domain.castmember;
 
 import com.curso.admin.catalogo.domain.Fixture;
+import com.curso.admin.catalogo.domain.UnitTest;
 import com.curso.admin.catalogo.domain.exceptions.NotificationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CastMemberTest {
+public class CastMemberTest extends UnitTest{
 
     @Test
     public void givenAValidParams_whenCallsNewMember_thenInstantiateACastMember() {
