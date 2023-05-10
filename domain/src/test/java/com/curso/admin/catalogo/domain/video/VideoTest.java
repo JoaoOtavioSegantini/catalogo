@@ -74,7 +74,7 @@ public class VideoTest extends UnitTest {
     }
 
     @Test
-    public void givenValidVideo_whenCallsUpdateThumbnailMedia_shouldReturnUpdated() {
+    public void givenValidVideo_whenCallsUpdateThumbnailMedia_shouldReturnUpdated() throws InterruptedException {
         // given
         final var expectedTitle = "System Design Interviews";
         final var expectedDescription = """
@@ -105,7 +105,7 @@ public class VideoTest extends UnitTest {
                 expectedMembers);
 
         final var aThumbMedia = ImageMedia.with("abc", "Trailer.mp4", "/123/videos");
-
+        Thread.sleep(250);
         // when
         final var actualVideo = Video.with(aVideo).updateThumbnailMedia(aThumbMedia);
 
@@ -134,7 +134,7 @@ public class VideoTest extends UnitTest {
     }
 
     @Test
-    public void givenValidVideo_whenCallsUpdateThumbnailHalfMedia_shouldReturnUpdated() {
+    public void givenValidVideo_whenCallsUpdateThumbnailHalfMedia_shouldReturnUpdated() throws InterruptedException {
         // given
         final var expectedTitle = "System Design Interviews";
         final var expectedDescription = """
@@ -166,6 +166,7 @@ public class VideoTest extends UnitTest {
 
         final var aThumbMedia = ImageMedia.with("abc", "Trailer.mp4", "/123/videos");
 
+        Thread.sleep(250);
         // when
         final var actualVideo = Video.with(aVideo).updateThumbnailHalfMedia(aThumbMedia);
 

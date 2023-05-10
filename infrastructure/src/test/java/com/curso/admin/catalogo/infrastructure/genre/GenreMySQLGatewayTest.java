@@ -270,7 +270,7 @@ public class GenreMySQLGatewayTest {
     }
 
     @Test
-    public void givenAValidGenreActive_whenCallsUpdateGenreInactivating_shouldPersistGenre() {
+    public void givenAValidGenreActive_whenCallsUpdateGenreInactivating_shouldPersistGenre() throws InterruptedException {
         // given
         final var expectedName = "Ação";
         final var expectedIsActive = false;
@@ -286,7 +286,7 @@ public class GenreMySQLGatewayTest {
 
         Assertions.assertTrue(aGenre.isActive());
         Assertions.assertNull(aGenre.getDeletedAt());
-
+        Thread.sleep(250);
         // when
         final var actualGenre = genreGateway.update(
                 Genre.with(aGenre)
