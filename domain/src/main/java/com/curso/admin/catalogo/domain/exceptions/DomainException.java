@@ -4,7 +4,7 @@ import com.curso.admin.catalogo.domain.validation.Error;
 
 import java.util.List;
 
-public class DomainException extends NotStackTraceException{
+public class DomainException extends NoStacktraceException {
 
     protected final List<Error> errors;
 
@@ -14,7 +14,7 @@ public class DomainException extends NotStackTraceException{
     }
 
     public static DomainException with(final Error anErrors) {
-        return new DomainException(anErrors.message(),List.of(anErrors));
+        return new DomainException(anErrors.message(), List.of(anErrors));
     }
 
     public static DomainException with(final List<Error> anErrors) {
