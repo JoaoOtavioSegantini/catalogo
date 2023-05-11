@@ -2,7 +2,9 @@ package com.curso.admin.catalogo.infrastructure;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import com.curso.admin.catalogo.IntegrationTest;
 
+@IntegrationTest
 public class MainTest {
 
     @Test
