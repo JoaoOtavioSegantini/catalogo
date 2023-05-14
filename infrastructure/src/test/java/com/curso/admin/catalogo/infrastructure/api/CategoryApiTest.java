@@ -1,5 +1,6 @@
 package com.curso.admin.catalogo.infrastructure.api;
 
+import com.curso.admin.catalogo.ApiTest;
 import com.curso.admin.catalogo.ControllerTest;
 import com.curso.admin.catalogo.application.category.create.CreateCategoryOutput;
 import com.curso.admin.catalogo.application.category.create.CreateCategoryUseCase;
@@ -80,6 +81,7 @@ public class CategoryApiTest {
 
         final var request = MockMvcRequestBuilders.post("/categories")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT)
                 .content(this.mapper.writeValueAsString(input));
 
         this.mvc.perform(request)
@@ -112,6 +114,7 @@ public class CategoryApiTest {
 
         final var request = MockMvcRequestBuilders.post("/categories")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT)
                 .content(this.mapper.writeValueAsString(input));
 
         this.mvc.perform(request)
@@ -146,6 +149,7 @@ public class CategoryApiTest {
 
         final var request = MockMvcRequestBuilders.post("/categories")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT)
                 .content(this.mapper.writeValueAsString(input));
 
         this.mvc.perform(request)
@@ -180,7 +184,8 @@ public class CategoryApiTest {
                 .thenReturn(CategoryOutput.from(aCategory));
 
         final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId)
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT);
 
         final var response = this.mvc.perform(request).andDo(print());
 
@@ -210,7 +215,8 @@ public class CategoryApiTest {
 
         final var request = MockMvcRequestBuilders.get("/categories/{id}", expectedId.getValue())
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT);
 
         final var response = this.mvc.perform(request).andDo(print());
 
@@ -236,6 +242,7 @@ public class CategoryApiTest {
         final var request = put("/categories/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT)
                 .content(mapper.writeValueAsString(aCommand));
 
         final var response = this.mvc.perform(request).andDo(print());
@@ -268,6 +275,7 @@ public class CategoryApiTest {
         final var request = put("/categories/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT)
                 .content(mapper.writeValueAsString(aCommand));
 
         final var response = this.mvc.perform(request).andDo(print());
@@ -301,6 +309,7 @@ public class CategoryApiTest {
         final var request = put("/categories/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT)
                 .content(mapper.writeValueAsString(aCommand));
 
         final var response = this.mvc.perform(request).andDo(print());
@@ -328,7 +337,8 @@ public class CategoryApiTest {
 
         final var request = delete("/categories/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT);
 
         final var response = this.mvc.perform(request).andDo(print());
 
@@ -361,7 +371,8 @@ public class CategoryApiTest {
                 .queryParam("dir", expectedDirection)
                 .queryParam("search", expectedTerm)
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.CATEGORIES_JWT);
 
         final var response = this.mvc.perform(request).andDo(print());
 

@@ -1,5 +1,6 @@
 package com.curso.admin.catalogo.infrastructure.api;
 
+import com.curso.admin.catalogo.ApiTest;
 import com.curso.admin.catalogo.ControllerTest;
 import com.curso.admin.catalogo.application.genre.create.CreateGenreOutput;
 import com.curso.admin.catalogo.application.genre.create.CreateGenreUseCase;
@@ -78,6 +79,7 @@ public class GenreAPITest {
         // when
         final var aRequest = post("/genres")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT)
                 .content(this.mapper.writeValueAsString(aCommand));
 
         final var response = this.mvc.perform(aRequest)
@@ -113,6 +115,7 @@ public class GenreAPITest {
         // when
         final var aRequest = post("/genres")
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT)
                 .content(this.mapper.writeValueAsString(aCommand));
 
         final var response = this.mvc.perform(aRequest)
@@ -154,7 +157,8 @@ public class GenreAPITest {
         // when
         final var aRequest = get("/genres/{id}", expectedId)
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT);
 
         final var response = this.mvc.perform(aRequest);
 
@@ -184,7 +188,8 @@ public class GenreAPITest {
         // when
         final var aRequest = get("/genres/{id}", expectedId.getValue())
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT);
 
         final var response = this.mvc.perform(aRequest);
 
@@ -215,6 +220,7 @@ public class GenreAPITest {
         // when
         final var aRequest = put("/genres/{id}", expectedId)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT)
                 .content(this.mapper.writeValueAsString(aCommand));
 
         final var response = this.mvc.perform(aRequest)
@@ -252,6 +258,7 @@ public class GenreAPITest {
         // when
         final var aRequest = put("/genres/{id}", expectedId)
                 .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT)
                 .content(this.mapper.writeValueAsString(aCommand));
 
         final var response = this.mvc.perform(aRequest)

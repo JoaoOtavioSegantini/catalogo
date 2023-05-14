@@ -1,6 +1,7 @@
 package com.curso.admin.catalogo.infrastructure.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.curso.admin.catalogo.ApiTest;
 import com.curso.admin.catalogo.ControllerTest;
 import com.curso.admin.catalogo.application.video.create.CreateVideoCommand;
 import com.curso.admin.catalogo.application.video.create.CreateVideoOutput;
@@ -127,6 +128,7 @@ public class VideoAPITest {
                 .file(expectedBanner)
                 .file(expectedThumb)
                 .file(expectedThumbHalf)
+                .with(ApiTest.VIDEOS_JWT)
                 .param("title", expectedTitle)
                 .param("description", expectedDescription)
                 .param("year_launched", String.valueOf(expectedLaunchYear.getValue()))
@@ -181,6 +183,7 @@ public class VideoAPITest {
         // when
         final var aRequest = multipart("/videos")
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.MULTIPART_FORM_DATA);
 
         final var response = this.mvc.perform(aRequest);
@@ -230,6 +233,7 @@ public class VideoAPITest {
 
         final var aRequest = post("/videos")
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(aCmd));
 
@@ -268,6 +272,7 @@ public class VideoAPITest {
         // when
         final var aRequest = post("/videos")
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.APPLICATION_JSON);
 
         final var response = this.mvc.perform(aRequest);
@@ -287,6 +292,7 @@ public class VideoAPITest {
         // when
         final var aRequest = post("/videos")
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                         {
@@ -351,7 +357,8 @@ public class VideoAPITest {
 
         // when
         final var aRequest = get("/videos/{id}", expectedId)
-                .accept(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT);
 
         final var response = this.mvc.perform(aRequest);
 
@@ -408,7 +415,8 @@ public class VideoAPITest {
 
         // when
         final var aRequest = get("/videos/{id}", expectedId)
-                .accept(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT);
 
         final var response = this.mvc.perform(aRequest);
 
@@ -457,6 +465,7 @@ public class VideoAPITest {
 
         final var aRequest = put("/videos/{id}", expectedId.getValue())
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(aCmd));
 
@@ -532,6 +541,7 @@ public class VideoAPITest {
 
         final var aRequest = put("/videos/{id}", expectedId.getValue())
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(aCmd));
 
@@ -596,7 +606,8 @@ public class VideoAPITest {
                 .queryParam("cast_members_ids", expectedCastMembers)
                 .queryParam("categories_ids", expectedCategories)
                 .queryParam("genres_ids", expectedGenres)
-                .accept(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT);
 
         final var response = this.mvc.perform(aRequest);
 
@@ -648,7 +659,8 @@ public class VideoAPITest {
 
         // when
         final var aRequest = get("/videos")
-                .accept(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT);
 
         final var response = this.mvc.perform(aRequest);
 
@@ -728,6 +740,7 @@ public class VideoAPITest {
         final var aRequest = multipart("/videos/{id}/medias/{type}", expectedId.getValue(), expectedType.name())
                 .file(expectedVideo)
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.MULTIPART_FORM_DATA);
 
         final var response = this.mvc.perform(aRequest);
@@ -764,6 +777,7 @@ public class VideoAPITest {
         final var aRequest = multipart("/videos/{id}/medias/INVALID", expectedId.getValue())
                 .file(expectedVideo)
                 .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.VIDEOS_JWT)
                 .contentType(MediaType.MULTIPART_FORM_DATA);
 
         final var response = this.mvc.perform(aRequest);
