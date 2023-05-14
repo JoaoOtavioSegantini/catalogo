@@ -287,7 +287,8 @@ public class GenreAPITest {
 
         // when
         final var aRequest = delete("/genres/{id}", expectedId)
-                .accept(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT);
 
         final var result = this.mvc.perform(aRequest);
 
@@ -323,7 +324,8 @@ public class GenreAPITest {
                 .queryParam("sort", expectedSort)
                 .queryParam("dir", expectedDirection)
                 .queryParam("search", expectedTerms)
-                .accept(MediaType.APPLICATION_JSON);
+                .accept(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT);
 
         final var response = this.mvc.perform(aRequest);
 

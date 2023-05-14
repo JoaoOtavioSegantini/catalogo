@@ -565,7 +565,8 @@ public class VideoAPITest {
         doNothing().when(deleteVideoUseCase).execute(any());
 
         // when
-        final var aRequest = delete("/videos/{id}", expectedId.getValue());
+        final var aRequest = delete("/videos/{id}", expectedId.getValue())
+                                   .with(ApiTest.GENRES_JWT);
         final var response = this.mvc.perform(aRequest);
 
         // then
@@ -704,7 +705,8 @@ public class VideoAPITest {
         when(getMediaUseCase.execute(any())).thenReturn(expectedMedia);
 
         // when
-        final var aRequest = get("/videos/{id}/medias/{type}", expectedId.getValue(), expectedMediaType.name());
+        final var aRequest = get("/videos/{id}/medias/{type}", expectedId.getValue(), expectedMediaType.name())
+                                .with(ApiTest.GENRES_JWT);
         final var response = this.mvc.perform(aRequest);
 
         // then

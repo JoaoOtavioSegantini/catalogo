@@ -78,6 +78,7 @@ public class CastMemberAPITest {
 
                 // when
                 final var aRequest = post("/cast_membres")
+                                .with(ApiTest.CAST_MEMBERS_JWT)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .with(ApiTest.CAST_MEMBERS_JWT)
                                 .content(mapper.writeValueAsString(aCommand));
@@ -306,7 +307,8 @@ public class CastMemberAPITest {
                                 .when(deleteCastMemberUseCase).execute(any());
 
                 // when
-                final var aRequest = delete("/cast_members/{id}", expectedId);
+                final var aRequest = delete("/cast_members/{id}", expectedId)
+                                     .with(ApiTest.CAST_MEMBERS_JWT);
 
                 final var response = this.mvc.perform(aRequest);
 
@@ -343,7 +345,8 @@ public class CastMemberAPITest {
                                 .queryParam("search", expectedTerms)
                                 .queryParam("sort", expectedSort)
                                 .queryParam("dir", expectedDirection)
-                                .accept(MediaType.APPLICATION_JSON);
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(ApiTest.CAST_MEMBERS_JWT);
 
                 final var response = this.mvc.perform(aRequest);
 

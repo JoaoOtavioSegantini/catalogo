@@ -1,5 +1,6 @@
 package com.curso.admin.catalogo.e2e.genre;
 
+import com.curso.admin.catalogo.ApiTest;
 import com.curso.admin.catalogo.E2ETest;
 import com.curso.admin.catalogo.domain.category.CategoryID;
 import com.curso.admin.catalogo.domain.genre.GenreID;
@@ -213,7 +214,8 @@ public class GenreE2ETest implements MockDsl {
 
         final var aRequest = MockMvcRequestBuilders.get("/genres/123")
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(ApiTest.GENRES_JWT);
 
         this.mvc.perform(aRequest)
                 .andExpect(status().isNotFound())
