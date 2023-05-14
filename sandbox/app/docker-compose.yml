@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+
+  app:
+    container_name: adm_videos_app
+    build:
+      context: ../../
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    networks:
+      - admin_videos_network
+      - adm_videos_services
+
+networks:
+  admin_videos_network:
+  adm_videos_services:
+   external: true

@@ -38,5 +38,4 @@ out/
 .history/
 
 .env
-bucket-credential.json
-codeflix-386015-e926ea61e79a.json
+sandbox/.docker
