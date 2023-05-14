@@ -77,10 +77,9 @@ public class CastMemberAPITest {
                                 .thenReturn(CreateCastMemberOutput.from(expectedId));
 
                 // when
-                final var aRequest = post("/cast_membres")
+                final var aRequest = post("/cast_members")
                                 .with(ApiTest.CAST_MEMBERS_JWT)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .with(ApiTest.CAST_MEMBERS_JWT)
                                 .content(mapper.writeValueAsString(aCommand));
 
                 final var response = this.mvc.perform(aRequest)

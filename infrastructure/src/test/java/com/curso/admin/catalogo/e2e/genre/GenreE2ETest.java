@@ -213,10 +213,10 @@ public class GenreE2ETest implements MockDsl {
         Assertions.assertEquals(0, genreRepository.count());
 
         final var aRequest = MockMvcRequestBuilders.get("/genres/123")
+                .with(ApiTest.ADMIN_JWT)
                 .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON)
-                .with(ApiTest.GENRES_JWT);
-
+                .contentType(MediaType.APPLICATION_JSON);
+                
         this.mvc.perform(aRequest)
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message", equalTo("Genre with ID 123 was not found")));
