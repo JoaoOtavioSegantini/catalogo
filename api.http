@@ -1,19 +1,35 @@
+@authToken = {{login.response.body.access_token}}
+@refreshToken = {{login.response.body.refresh_token}}
+@realm = fc3-codeflix
+@keycloackHost = http://localhost:8443
+@apiHost = http://localhost:8080/api
+@userCategories = john
+@userAdmin = joaotavioos
+@username = {{userAdmin}}
+@password = 123456
 
 # @name login
-POST http://localhost:8443/realms/fc3-codeflix/protocol/openid-connect/token
+POST {{keycloackHost}}/realms/{{realm}}/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 client_id=fc3-admin-do-catalogo
 &client_secret=**********
 &grant_type=password
-&username=joaotavioos
-&password=123456
-
+&username={{username}}
+&password={{password}}
 
 ###
-
-@authToken = {{login.response.body.access_token}}
-@refreshToken = {{login.response.body.refresh_token}}
-
-GET http://localhost:8080/api/categories
+GET {{apiHost}}/categories
 Authorization: Bearer  {{authToken}}
+
+###
+GET {{apiHost}}/videos
+Authorization: Bearer {{authToken}}
+
+###
+GET {{apiHost}}/cast_members
+Authorization: Bearer {{authToken}}
+
+###
+GET {{apiHost}}/genres
+Authorization: Bearer {{authToken}}
